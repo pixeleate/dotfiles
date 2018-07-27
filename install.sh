@@ -3,7 +3,38 @@ command_exists() {
 }
 
 echo "Installing dotfiles."
-cp ./nvim/.vimrc ~/
+cp ./nvim/init.vim ~/.config/nvim/ 
+cp ./nvim/.init.vim ~/.config/nvim/
+
+if ! command_exists zsh; then
+    echo "zsh not found. Please install and then re-run installation scripts"
+    exit 1
+elif ! [[ $SHELL =~ .*zsh.* ]]; then
+    echo "Configuring zsh as default shell"
+    chsh -s "$(which zsh)"
+fi
+
+echo "Restarting terminal"
+source ~/.zshrc
+
+rm ~/.zshrc
+
+echo "source ~/dotfiles/zsh/.zshrc" >> ~/.zshrc
+
+echo "cloning fzf"
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+
+echo "Installing fZF"
+~/.fzf/install
+
+
+echo "Brew installing"
+
+echo "Brewing ripgrep"
+brew install ripgrep
+
+echo "Brewing fd"
+brew install fd
 
 echo "Initializing submodule(s)"
 git submodule update --init --recursive
@@ -21,12 +52,5 @@ fi
 echo "creating vim directories"
 mkdir -p ~/.vim-tmp
 
-if ! command_exists zsh; then
-    echo "zsh not found. Please install and then re-run installation scripts"
-    exit 1
-elif ! [[ $SHELL =~ .*zsh.* ]]; then
-    echo "Configuring zsh as default shell"
-    chsh -s "$(which zsh)"
-fi
 
 echo "Done. Reload your terminal."
