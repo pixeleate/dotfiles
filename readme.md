@@ -13,7 +13,6 @@ My leader key is Space.
 I use vim-fugitive to handle my git work while working in vim. I have setup
 a few key mappings to make my git workflow a bit faster. 
 
-
 All of the keys are prefixed by the `<Leader>` key.
 
 ```
@@ -24,23 +23,35 @@ gc = git commit
 gca = git commit -- amend
 gb = git blame
 ```
-### FZF 
- FZF is love, its literally an incredible tool
 
- ```
-  <Leader> f  = files
-  <Leader> g = Git files
-  <Leader><Leader> = Recent Files
-  <Leader> C = Commits
-  <Leader> c = Commands
-  <Leader> ; = Buffer lines
-  <Leader> T = Tags
-  <Leader> t = Buffer Tags
-  <Leader> H = history
-  <Leader> s = grep file
-  <Leader> S = grep cursor word
-  <Leader> b = buffers
- ```
+### Vim - Denite 
+I use Denite to handle the bulk of my vim work. I am still learning denite, but
+it's been fantastic to use thus far. I have a few key mappings that I like to
+use to optimize my Denite work
+
+Again - prefix all the commands with `<Leader>`
+
+```
+  f = :DeniteProjectDir buffer file file_rec<CR>  
+  s = :DeniteBufferDir  grep<CR><Esc>
+  cw = :DeniteCursorWord grep:.<CR><Esc>
+  ju = :DeniteProjectDir jump<CR>
+  b = :Denite buffer<CR>
+  ch = :DeniteProjectDir command_history<CR>
+```
+
+`f` acts as my fuzzy finder, within the project directory. I had it use
+`file_mru` but I noticed it including files outside of my current directory, so
+I opted out of it for now.
+
+`s` is a way to search the buffer
+
+`cw` will grep the word under the cursor
+
+`ju` will jump to a tag
+
+ `b` will trigger the buffer window
+ 
 ### Dash - vim
  I work on OSX currently, and have Dash installed. So here are my current key
  mappings to use Dash with vim.
@@ -58,9 +69,8 @@ javascript/typescript. I also have it fix on  save.
 
 Haskell - I am trying out brittany
 
-### YouCompleteMe
-YoucompleteMe works best for me, so i use it.
-
+### Deoplete
+I use deoplete for completion. It's working great, no config needed.
 
 ### Intero
  Again - all commands are prefixed with `<Leader>`
